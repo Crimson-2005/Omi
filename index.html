@@ -4,77 +4,87 @@
   <meta charset="UTF-8" />
   <title>Happy Birthday Omii 🎉</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- AOS Animation -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 </head>
 
 <body>
 
-<!-- ================= LOADING SCREEN ================= -->
+<!-- LOADING -->
 <div id="loading">
   <h1>Loading Something Cool...</h1>
   <p id="intro-timer">5</p>
-  <button id="revealBtn" class="hidden">Ready? Click Here 😎</button>
+  <button id="revealBtn">Ready? Click Here 😎</button>
 </div>
 
-<!-- ================= INTRO CARD ================= -->
+<!-- INTRO -->
 <div class="card" data-aos="zoom-in">
   <h2>Happy Birthday, Bhaiii 🎉🔥</h2>
   <p>
-   TEXT
+    Bro… today is YOUR day 😎  
+    But first… prove you're worthy 😏🎮
   </p>
 </div>
 
 <div class="divider">• • • ⚡ • • •</div>
 
-<!-- ================= GAME INTRO ================= -->
+<!-- GAME INTRO -->
 <div class="card" id="gameIntro">
   <h2>Before things get serious…</h2>
   <p>Let’s see if you’ve still got skills 😏🎮</p>
-  <p>Birthday = games. No excuses accepted!! </p>
   <button onclick="startHeartGame()">Start Game</button>
 </div>
 
-<!-- ================= GAME AREA ================= -->
+<!-- GAME -->
 <div class="card" id="gameArea" style="display:none;">
   <h2 id="gameTitle"></h2>
-  <div id="gameBox" style="margin-top:20px;"></div>
-  <p id="gameMessage" style="margin-top:20px;"></p>
+  <div id="gameBox"></div>
+  <p id="gameMessage"></p>
 </div>
 
-<!-- ================= MAIN CONTENT ================= -->
+<!-- MAIN CONTENT -->
 <div id="mainContent">
 
-  <div class="card" data-aos="zoom-in">
-    <h2>This One’s For You 💯</h2>
-    <p>
-     TEXT 💫
-    </p>
-    <img src="pic1.jpeg" alt="Memory">
+  <div class="card">
+    <h2>Congratsss!! You passed them all 💯</h2>
+    <p>Okay fine… you earned this 😤🔥</p>
+  </div>
+
+  <!-- WISHES -->
+  <div class="card">
+    <h2>💌 Wishes</h2>
+    <p><b>Shreya:</b> Happy Birthdayyy bhaiii 💙</p>
+    <p><b>Friend 1:</b> Party kab de raha hai 😎</p>
+    <p><b>Friend 2:</b> Stay awesome always 💯</p>
+  </div>
+
+  <!-- GIF -->
+  <div class="card">
+    <h2>🎉 YOU TODAY</h2>
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+  </div>
+
+  <!-- IMAGE -->
+  <div class="card">
+    <h2>Memories 💫</h2>
+    <img src="pic1.jpeg">
   </div>
 
 </div>
 
-<!-- ================= BACKGROUND EFFECTS ================= -->
-<div class="particles"></div>
+<!-- EFFECTS -->
+<div class="hearts"></div>
 <div id="balloons"></div>
 
-<!-- ================= AUDIO ================= -->
 <audio id="birthdayMusic" preload="auto" loop>
   <source src="birthday.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ================= CONFETTI ================= -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<!-- ================= JS ================= -->
 <script src="script.js"></script>
 
 </body>
