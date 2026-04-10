@@ -92,8 +92,8 @@ function startTargetGame() {
     const items = ['🎁','🎉','🎂'];
     target.innerText = items[Math.floor(Math.random() * items.length)];
 
-    target.style.top = Math.random() * 260 + "px";
-    target.style.left = Math.random() * 90 + "%";
+    target.style.top = Math.random() * 250 + "px";
+    target.style.left = Math.random() * 80 + "%";
 
     target.onclick = () => {
       score++;
@@ -109,18 +109,20 @@ function startTargetGame() {
     };
 
     box.appendChild(target);
-    setTimeout(() => target.remove(), 1200); // slower disappear
+    setTimeout(() => target.remove(), 1500); // slower disappear
   }
 
-  let interval = setInterval(spawnTarget, 900); // slower spawn
+  let interval = setInterval(spawnTarget, 1200); // slower spawn
 }
 
 // 🧠 MEMORY GAME
 function startMemoryGame() {
   const box = document.getElementById("gameBox");
   const title = document.getElementById("gameTitle");
+  const msg = document.getElementById("gameMessage");
 
-  title.innerText = "🧠 Memory";
+  title.innerText = "🧠 Memory Test";
+  msg.innerText = "Memorize the sequence...";
 
   const emojis = ["🎈","🎂","🎉","🎁"];
   let sequence = [];
@@ -133,6 +135,8 @@ function startMemoryGame() {
 
   setTimeout(() => {
     box.innerHTML = "";
+    msg.innerText = "Repeat the sequence!";
+
     let user = [];
 
     emojis.forEach(e => {
@@ -142,14 +146,18 @@ function startMemoryGame() {
       btn.onclick = () => {
         user.push(e);
 
+        // ❌ WRONG
         if (user[user.length - 1] !== sequence[user.length - 1]) {
+          msg.innerText = "Wrong 😭";
           currentGame++;
-          setTimeout(startNextGame, 1000);
+          setTimeout(startNextGame, 1500);
         }
 
+        // ✅ CORRECT FULL
         if (user.length === sequence.length) {
+          msg.innerText = "Perfect 🧠🔥";
           currentGame++;
-          setTimeout(startNextGame, 1000);
+          setTimeout(startNextGame, 1500);
         }
       };
 
@@ -158,7 +166,6 @@ function startMemoryGame() {
 
   }, 2000);
 }
-
 // 💣 BOMB GAME
 function startBombGame() {
   const box = document.getElementById("gameBox");
@@ -181,31 +188,27 @@ function startBombGame() {
     tile.onclick = () => {
       if (i === bombIndex) {
         tile.innerText = "💣";
-        msg.innerText = "BOOM 💀 You lost!";
-        
+        msg.innerText = "BOOM 💀";
         currentGame++;
         setTimeout(startNextGame, 1500);
       } else {
         tile.innerText = "✅";
         safeClicks++;
-
         msg.innerText = `Safe: ${safeClicks}/3`;
 
         if (safeClicks >= 3) {
           msg.innerText = "You survived 😎🔥";
-          
           currentGame++;
           setTimeout(startNextGame, 1500);
         }
       }
 
-      tile.onclick = null; // disable re-click
+      tile.onclick = null;
     };
 
     box.appendChild(tile);
   }
 }
-
 // UNLOCK
 function unlockMainContent() {
   document.getElementById("gameArea").style.display = "none";
@@ -215,9 +218,14 @@ function unlockMainContent() {
 
   const cards = main.querySelectorAll(".hidden-card");
 
-  cards.forEach((card, index) => {
-    setTimeout(() => {
-      card.classList.add("show-card");
-    }, index * 800); // delay between each card
-  });
+  // scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show-card");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  cards.forEach(card => observer.observe(card));
 }
