@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Somya !!! 🎂</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+</head>
+
+<body>
+
+<!-- ================= LOADING SCREEN ================= -->
+<div id="loading">
+  <h1>Surprise Loading...</h1>
+  <p id="intro-timer">5</p>
+  <button id="revealBtn" class="hidden">Click for your Surprise 🎁</button>
+</div>
+
+<!-- ================= INTRO CARD ================= -->
+<div class="card" data-aos="zoom-in">
+  <h2>Happy Birthday Somyaa 🎂✨</h2>
+  <p>
+   TEXT
+  </p>
+</div>
+
+<div class="heart-break">• • • 💗 • • •</div>
+
+<!-- ================= GAME INTRO ================= -->
+<div class="card" id="gameIntro">
+  <h2>Isse pehle hum tumhe emotional kar dein…</h2>
+  <p>Thoda masti karte hai 😌🎮</p>
+  <p>Birthday pe games toh bante hai naa 😏</p>
+  <button onclick="startHeartGame()">Start Games</button>
+</div>
+
+<!-- ================= GAME AREA ================= -->
+<div class="card" id="gameArea" style="display:none;">
+  <h2 id="gameTitle"></h2>
+  <div id="gameBox" style="margin-top:20px;"></div>
+  <p id="gameMessage" style="margin-top:20px;"></p>
+</div>
+
+<!-- ================= MAIN CONTENT ================= -->
+<div id="mainContent">
+
+  <div class="card" data-aos="zoom-in">
+    <h2>For You 💖</h2>
+    <p>
+     TEXT 💫
+    </p>
+    <img src="pic1.jpeg" alt="Memory">
+  </div>
+
+</div>
+
+<!-- ================= BACKGROUND EFFECTS ================= -->
+<div class="hearts"></div>
+<div id="balloons"></div>
+
+<!-- ================= AUDIO (FIXED) ================= -->
+<audio id="birthdayMusic" preload="auto" loop>
+  <source src="birthday.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ================= CONFETTI ================= -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<!-- ================= JS ================= -->
+<script src="script.js"></script>
+
+</body>
+</html>
