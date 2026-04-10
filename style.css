@@ -215,3 +215,14 @@ button:hover, #revealBtn:hover {
     transform: scale(1);
   }
 }
+
+.hidden-card {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.show-card {
+  opacity: 1;
+  transform: translateY(0);
+}
