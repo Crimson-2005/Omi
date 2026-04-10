@@ -191,8 +191,15 @@ function startBombGame() {
 // UNLOCK
 function unlockMainContent() {
   document.getElementById("gameArea").style.display = "none";
-  const main = document.getElementById("mainContent");
 
+  const main = document.getElementById("mainContent");
   main.style.display = "block";
-  setTimeout(() => main.style.opacity = "1", 100);
+
+  const cards = main.querySelectorAll(".hidden-card");
+
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add("show-card");
+    }, index * 800); // delay between each card
+  });
 }
