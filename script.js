@@ -189,39 +189,52 @@ function startBombGame() {
   title.innerText = "💣 Avoid the bomb";
   msg.innerText = "Find 3 safe tiles to win 😏";
 
-  box.innerHTML = "";
+  function playRound() {
+    box.innerHTML = "";
 
-  let bombIndex = Math.floor(Math.random() * 9);
-  let safeClicks = 0;
+    let bombIndex = Math.floor(Math.random() * 9);
+    let safeClicks = 0;
 
-  for (let i = 0; i < 9; i++) {
-    let tile = document.createElement("div");
-    tile.className = "choice-box";
-    tile.innerText = "❓";
+    for (let i = 0; i < 9; i++) {
+      let tile = document.createElement("div");
+      tile.className = "choice-box";
+      tile.innerText = "❓";
 
-    tile.onclick = () => {
-      if (i === bombIndex) {
-        tile.innerText = "💣";
-        msg.innerText = "BOOM 💀";
-        currentGame++;
-        setTimeout(startNextGame, 1500);
-      } else {
+      tile.onclick = () => {
+        // 💀 CLICKED BOMB → RESTART SAME GAME
+        if (i === bombIndex) {
+          tile.innerText = "💣";
+          msg.innerText = "BOOM 💀 Try again...";
+
+          setTimeout(() => {
+            playRound(); // 🔁 restart bomb game
+          }, 1200);
+
+          return;
+        }
+
+        // ✅ SAFE CLICK
         tile.innerText = "✅";
         safeClicks++;
         msg.innerText = `Safe: ${safeClicks}/3`;
 
         if (safeClicks >= 3) {
           msg.innerText = "You survived 😎🔥";
-          currentGame++;
-          setTimeout(startNextGame, 1500);
+
+          setTimeout(() => {
+            currentGame++;
+            startNextGame();
+          }, 1500);
         }
-      }
 
-      tile.onclick = null;
-    };
+        tile.onclick = null;
+      };
 
-    box.appendChild(tile);
+      box.appendChild(tile);
+    }
   }
+
+  playRound(); // start first round
 }
 // UNLOCK
 function unlockMainContent() {
