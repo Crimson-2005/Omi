@@ -230,9 +230,12 @@ function unlockMainContent() {
   const main = document.getElementById("mainContent");
   main.style.display = "block";
 
+  setTimeout(() => {
+    main.style.opacity = "1";
+  }, 50);
+
   const cards = main.querySelectorAll(".hidden-card");
 
-  // scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
