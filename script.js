@@ -75,14 +75,13 @@ function startNextGame() {
 // 🎯 TARGET GAME
 function startTargetGame() {
   let score = 0;
-  let timeLeft = 10;
 
   const box = document.getElementById("gameBox");
   const title = document.getElementById("gameTitle");
   const msg = document.getElementById("gameMessage");
 
   title.innerText = "🎯 Hit the gifts!";
-  msg.innerText = "Click fast!";
+  msg.innerText = "Score 5 to win 😏";
 
   box.innerHTML = `<div id="scoreDisplay">Score: 0</div>`;
 
@@ -100,24 +99,20 @@ function startTargetGame() {
       score++;
       document.getElementById("scoreDisplay").innerText = "Score: " + score;
       target.remove();
+
+      if (score >= 5) {
+        clearInterval(interval);
+        msg.innerText = "You win 😎🔥";
+        currentGame++;
+        setTimeout(startNextGame, 1500);
+      }
     };
 
     box.appendChild(target);
-    setTimeout(() => target.remove(), 800);
+    setTimeout(() => target.remove(), 1200); // slower disappear
   }
 
-  let interval = setInterval(spawnTarget, 500);
-
-  let timer = setInterval(() => {
-    timeLeft--;
-
-    if (timeLeft <= 0) {
-      clearInterval(interval);
-      clearInterval(timer);
-      currentGame++;
-      setTimeout(startNextGame, 1500);
-    }
-  }, 1000);
+  let interval = setInterval(spawnTarget, 900); // slower spawn
 }
 
 // 🧠 MEMORY GAME
