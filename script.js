@@ -1,17 +1,16 @@
 AOS.init();
 
+// ELEMENTS
 const timerEl = document.getElementById("intro-timer");
 const revealBtn = document.getElementById("revealBtn");
 const loadingScreen = document.getElementById("loading");
 const music = document.getElementById("birthdayMusic");
+const heartContainer = document.querySelector(".hearts");
 
-const heartContainer = document.querySelector('.hearts');
-const balloonArea = document.getElementById('balloons');
-
+// COUNTDOWN
 let time = 5;
-
-// 🔥 COUNTDOWN FIX
 timerEl.innerText = time;
+
 const countdown = setInterval(() => {
   time--;
   timerEl.innerText = time;
@@ -22,7 +21,7 @@ const countdown = setInterval(() => {
   }
 }, 1000);
 
-// 🎉 REVEAL
+// REVEAL
 revealBtn.addEventListener("click", () => {
   loadingScreen.style.display = "none";
 
@@ -31,28 +30,28 @@ revealBtn.addEventListener("click", () => {
 
   confetti({ particleCount: 150, spread: 70 });
 
-  startHeartsAndBalloons();
+  startFloating();
 });
 
-// 🎈 FLOATING ICONS
-function startHeartsAndBalloons() {
+// FLOATING ICONS 🎈
+function startFloating() {
   setInterval(() => {
-
     const icons = ['🎈','🎉','🎂','✨','🥳'];
 
-    const heart = document.createElement('span');
-    heart.textContent = icons[Math.floor(Math.random() * icons.length)];
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = '25px';
-    heart.style.animationDuration = '5s';
-    heartContainer.appendChild(heart);
+    const el = document.createElement("span");
+    el.innerText = icons[Math.floor(Math.random() * icons.length)];
 
-    setTimeout(() => heart.remove(), 5000);
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = "25px";
+    el.style.animationDuration = "5s";
 
+    heartContainer.appendChild(el);
+
+    setTimeout(() => el.remove(), 5000);
   }, 500);
 }
 
-// 🎮 GAME FLOW
+// GAME FLOW
 let currentGame = 0;
 const games = ["target", "memory", "bomb"];
 
@@ -73,7 +72,7 @@ function startNextGame() {
   if (games[currentGame] === "bomb") startBombGame();
 }
 
-// 🎯 TARGET GAME FIXED
+// 🎯 TARGET GAME
 function startTargetGame() {
   let score = 0;
   let timeLeft = 10;
@@ -125,10 +124,8 @@ function startTargetGame() {
 function startMemoryGame() {
   const box = document.getElementById("gameBox");
   const title = document.getElementById("gameTitle");
-  const msg = document.getElementById("gameMessage");
 
   title.innerText = "🧠 Memory";
-  msg.innerText = "Remember...";
 
   const emojis = ["🎈","🎂","🎉","🎁"];
   let sequence = [];
@@ -196,7 +193,7 @@ function startBombGame() {
   }
 }
 
-// 🎉 UNLOCK
+// UNLOCK
 function unlockMainContent() {
   document.getElementById("gameArea").style.display = "none";
   const main = document.getElementById("mainContent");
