@@ -122,49 +122,63 @@ function startMemoryGame() {
   const msg = document.getElementById("gameMessage");
 
   title.innerText = "🧠 Memory Test";
-  msg.innerText = "Memorize the sequence...";
 
   const emojis = ["🎈","🎂","🎉","🎁"];
-  let sequence = [];
 
-  for (let i = 0; i < 4; i++) {
-    sequence.push(emojis[Math.floor(Math.random() * emojis.length)]);
-  }
-
-  box.innerHTML = `<h2>${sequence.join(" ")}</h2>`;
-
-  setTimeout(() => {
-    box.innerHTML = "";
-    msg.innerText = "Repeat the sequence!";
-
+  function playRound() {
+    let sequence = [];
     let user = [];
 
-    emojis.forEach(e => {
-      let btn = document.createElement("button");
-      btn.innerText = e;
+    msg.innerText = "Memorize the sequence...";
 
-      btn.onclick = () => {
-        user.push(e);
+    // generate sequence
+    for (let i = 0; i < 4; i++) {
+      sequence.push(emojis[Math.floor(Math.random() * emojis.length)]);
+    }
 
-        // ❌ WRONG
-        if (user[user.length - 1] !== sequence[user.length - 1]) {
-          msg.innerText = "Wrong 😭";
-          currentGame++;
-          setTimeout(startNextGame, 1500);
-        }
+    box.innerHTML = `<h2>${sequence.join(" ")}</h2>`;
 
-        // ✅ CORRECT FULL
-        if (user.length === sequence.length) {
-          msg.innerText = "Perfect 🧠🔥";
-          currentGame++;
-          setTimeout(startNextGame, 1500);
-        }
-      };
+    // show for 2 sec
+    setTimeout(() => {
+      box.innerHTML = "";
+      msg.innerText = "Repeat the sequence!";
 
-      box.appendChild(btn);
-    });
+      emojis.forEach(e => {
+        let btn = document.createElement("button");
+        btn.innerText = e;
 
-  }, 2000);
+        btn.onclick = () => {
+          user.push(e);
+
+          // ❌ WRONG → restart SAME GAME
+          if (user[user.length - 1] !== sequence[user.length - 1]) {
+            msg.innerText = "Wrong 😭 Try again...";
+
+            setTimeout(() => {
+              playRound(); // restart memory game
+            }, 1200);
+
+            return;
+          }
+
+          // ✅ CORRECT FULL
+          if (user.length === sequence.length) {
+            msg.innerText = "Perfect 🧠🔥";
+
+            setTimeout(() => {
+              currentGame++;
+              startNextGame();
+            }, 1500);
+          }
+        };
+
+        box.appendChild(btn);
+      });
+
+    }, 2000);
+  }
+
+  playRound(); // start first round
 }
 // 💣 BOMB GAME
 function startBombGame() {
