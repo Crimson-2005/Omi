@@ -163,11 +163,15 @@ function startMemoryGame() {
 function startBombGame() {
   const box = document.getElementById("gameBox");
   const title = document.getElementById("gameTitle");
+  const msg = document.getElementById("gameMessage");
 
-  title.innerText = "💣 Avoid Bomb";
+  title.innerText = "💣 Avoid the bomb";
+  msg.innerText = "Find 3 safe tiles to win 😏";
+
   box.innerHTML = "";
 
-  let bomb = Math.floor(Math.random() * 9);
+  let bombIndex = Math.floor(Math.random() * 9);
+  let safeClicks = 0;
 
   for (let i = 0; i < 9; i++) {
     let tile = document.createElement("div");
@@ -175,13 +179,27 @@ function startBombGame() {
     tile.innerText = "❓";
 
     tile.onclick = () => {
-      if (i === bomb) {
+      if (i === bombIndex) {
         tile.innerText = "💣";
+        msg.innerText = "BOOM 💀 You lost!";
+        
+        currentGame++;
+        setTimeout(startNextGame, 1500);
       } else {
         tile.innerText = "✅";
+        safeClicks++;
+
+        msg.innerText = `Safe: ${safeClicks}/3`;
+
+        if (safeClicks >= 3) {
+          msg.innerText = "You survived 😎🔥";
+          
+          currentGame++;
+          setTimeout(startNextGame, 1500);
+        }
       }
-      currentGame++;
-      setTimeout(startNextGame, 1000);
+
+      tile.onclick = null; // disable re-click
     };
 
     box.appendChild(tile);
